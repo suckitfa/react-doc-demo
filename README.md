@@ -10,3 +10,8 @@ yarn start # start the project
 ```
 
 that's all...........
+
+Here is some note that I think is important: 
+
+Take a look  at  `React文档内容.md`
+
