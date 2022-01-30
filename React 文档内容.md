@@ -138,3 +138,88 @@ export default App;
 ### 5. 事件处理
 
 - 合成事件
+
+### 6. 条件渲染
+
+![image-20220128042044627](./public/image-20220128042044627.png)
+
+**很明显在这个列子中 ， JSX元素直接参与JS的运算。**
+1. if..else..
+2. && 逻辑运算符
+3. 三元运算符
+
+组件的render方法中返回Null并不会影响组件的生命周期。
+
+### 7. 列表和key
+- 常用map来根据数组内元素构造相应的UI
+
+- `a key should be provided for list items,` 当你创建一个元素时，必须包含一个key属性。key帮助react识别哪些元素改变了。`一个key最好是在列表中用于独一无二的字符串`。通常是数据的id来作为元素的key**如果不指定显示的key，那么react会默认的使用索引作为列表的key值**。
+
+- key的正确使用方式：在最近的组件上, 如下所示。
+
+```jsx
+// 创建了一个ListItem组件
+function ListItem({num}){
+    return <li>{num}</li>
+}
+
+// 创建NumberList组件,
+// 并在组件内调用ListItem，作为列表项，因此，要在ListItem上设置key
+function NumberList({numbers}) {
+    const ListItems = numbers.map(
+      num => <ListItem key={num.toString()} num={num}/>
+    ) 
+    return(
+        <ul>
+            {ListItems}
+        </ul>
+    )
+}
+
+function TestListWithPropKey() {
+    return <NumberList numbers={[1,2,3,4,5,6]}/>
+}
+
+export default TestListWithPropKey;
+```
+
+
+
+![image-20220128045008661](./public/image-20220128045008661.png)
+
+- map的嵌套层次太多，可以提出一个组件
+
+### 8.表单
+- 受控组件： 表单元素 input, textarea select等通常自己维护state, 并根据用户的输入进行更新。 而React中，可变状态通常保存在组件的state属性中，并且只能够通过setState来更新。将两者结合起来，使React的state成为'唯一的数据源'。渲染表单的React组件还控制着用户的输入过中表单发生的操作。被React以这种方式控制取值的表单输入元素就叫做”受控组件“
+- (核心： 表单元素  | React的state是唯一的数据源) **结合代码仔细体会受控组件这句话**
+
+```jsx
+
+import React from 'react'
+class NameForm extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {value:''}
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.hanldeChange = this.handleSubmit.bind(this)
+    }
+    hanldeChange(e) {
+        this.setState({vale:e.target.value})
+    }
+    handleSubmit(e) {
+        alert('提交的名字为：' + this.state.value)
+        e.preventDefault();
+    }
+    render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <label>
+                    <input type="text" value={this.state.value} onChange={this.hanldeChange}/>
+                </label>
+                <input type="submit" value="提交" />
+            </form>
+        )
+    }
+}
+```
+

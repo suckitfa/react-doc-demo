@@ -13,6 +13,17 @@ import TestJSX03 from './01JSX/TestJSX03'
 import TestComponent from './03component/TestComponent'
 import TestClassComponent from './03component/TestClassConponent'
 import Clock from './04state/Clock';
+import Greeting from './05condition/Greetings';
+import LoginControl from './05condition/LoginControl'
+import MailBox from './05condition/Mailbox';
+import Page from './05condition/WarningBanner'
+import TestList from './06ListandKey/TestList';
+import TestListWithPropKey from './06ListandKey/TestListWithPropKey';
+import Blog from './06ListandKey/Blog';
+import NameForm from './07form/NameForm'
+import EassyForm from './07form/EassyFrom'
+import FlavorForm from './07form/FlavorForm';
+import FileForm from './07form/FileForm';
 function ContextHookExample() {
   const mycontext = useContext(ThemeContext)
   console.log(mycontext)
@@ -29,6 +40,11 @@ const themes = {
 }
 const ThemeContext = React.createContext(themes.light)
 function App() {
+  const messages =  ['react', 'Re:react','Re:re react']
+  const posts = [
+    {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+    {id: 2, title: 'Installation', content: 'You can install React from npm.'}
+  ];
   return (
     <div >
         {/* <TestJSX />
@@ -37,7 +53,20 @@ function App() {
         {/* <TestRender /> */}
         {/* <TestComponent name="Bob"/>
         <TestClassComponent name="Evan" /> */}
-        <Clock />
+        {/* <Clock /> */}
+        {/* <Greeting isLoggedIn={true}/> */}
+        {/* <LoginControl /> */}
+        {/* < MailBox unreadMessages={messages}/>
+         */}
+         {/* <Page warn={true}/>
+          */}
+          {/* <TestList numbers={[1,2,3,4,5,6]}/> */}
+          {/* < TestListWithPropKey /> */}
+          {/* <Blog posts={posts} /> */}
+          {/* <NameForm /> */}
+          {/* <EassyForm /> */}
+          {/* <FlavorForm></FlavorForm> */}
+          <FileForm />
     </div>
   );
 }
